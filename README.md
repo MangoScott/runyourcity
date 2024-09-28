@@ -10,15 +10,6 @@ The Run Your City Impact Calculator is a simple, web-based tool designed to esti
 - Calculates estimated impact based on number of participants, program duration, and session frequency
 - Provides results for total miles run, calories burned, potential confidence increase, and community engagement hours
 
-## How to Use
-
-1. Open the `index.html` file in a web browser.
-2. Enter the following information:
-   - Number of children participating
-   - Program duration (in weeks)
-   - Number of sessions per week
-3. Click the "Calculate Impact" button to see the results.
-
 ## Calculations Explained
 
 The calculator uses the following methods to estimate the program's impact:
