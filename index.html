@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Your City Impact Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005D;
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #E8DEF8;
+            --md-sys-color-on-secondary-container: #1D192B;
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.5;
+            color: var(--md-sys-color-on-surface);
+            background-color: var(--md-sys-color-surface);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .title-container {
+            background-color: var(--md-sys-color-primary-container);
+            margin: -24px -24px 24px -24px;
+            padding: 24px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+        h1 {
+            color: var(--md-sys-color-on-primary-container);
+            font-weight: 700;
+            font-size: 28px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            color: var(--md-sys-color-on-primary-container);
+            font-weight: 400;
+            font-size: 16px;
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+        .input-field {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--md-sys-color-on-surface);
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #79747E;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+        }
+        button {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #7965AF;
+        }
+        #result {
+            margin-top: 24px;
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            padding: 16px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="title-container">
+            <h1>Run Your City</h1>
+            <div class="subtitle">Impact Calculator</div>
+        </div>
+        <p>Estimate the potential impact of our running programs on children in your community.</p>
+        
+        <div class="input-field">
+            <label for="numChildren">Number of children participating:</label>
+            <input type="number" id="numChildren" min="1" value="20">
+        </div>
+        
+        <div class="input-field">
+            <label for="programDuration">Program duration (weeks):</label>
+            <input type="number" id="programDuration" min="1" value="12">
+        </div>
+        
+        <div class="input-field">
+            <label for="sessionsPerWeek">Sessions per week:</label>
+            <select id="sessionsPerWeek">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        
+        <button onclick="calculateImpact()">Calculate Impact</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateImpact() {
+            const numChildren = parseInt(document.getElementById('numChildren').value);
+            const programDuration = parseInt(document.getElementById('programDuration').value);
+            const sessionsPerWeek = parseInt(document.getElementById('sessionsPerWeek').value);
+            
+            const totalSessions = programDuration * sessionsPerWeek;
+            const totalMilesRun = totalSessions * numChildren * 1.5;
+            const caloriesBurned = totalMilesRun * 100;
+            const confidenceIncrease = Math.min(programDuration * 2, 100);
+            
+            const result = `
+                <h2>Estimated Program Impact:</h2>
+                <ul>
+                    <li>Total miles run by all children: ${totalMilesRun.toFixed(0)} miles</li>
+                    <li>Estimated calories burned: ${caloriesBurned.toFixed(0)} calories</li>
+                    <li>Potential confidence increase: ${confidenceIncrease.toFixed(0)}%</li>
+                    <li>Community engagement hours: ${(totalSessions * numChildren).toFixed(0)} hours</li>
+                </ul>
+                <p>These children are on their way to becoming healthier, more confident, and inspired individuals!</p>
+            `;
+            
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>
